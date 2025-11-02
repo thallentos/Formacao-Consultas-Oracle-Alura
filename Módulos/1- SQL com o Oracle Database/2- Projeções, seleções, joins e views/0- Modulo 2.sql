@@ -1,0 +1,93 @@
+-- Usando Alias
+/*
+    Duas formas de utilizar:
+    1- Colocando "AS"
+        Exemplo: "SELECT CPF AS IDENTIFICADOR FROM TABELA_DE_CLIENTES;"
+    2- NÃO Colocando "AS"
+        Exemplo: "SELECT CPF IDENTIFICADOR FROM TABELA_DE_CLIENTES;"
+*/
+--- fim do topico
+
+-- Usando IN
+SELECT *
+FROM TABELA_DE_CLIENTES
+WHERE CIDADE IN ('Rio de Janeiro', 'São Paulo')
+    AND (IDADE BETWEEN 20 AND 25);
+    
+SELECT *
+FROM TABELA_DE_CLIENTES
+WHERE BAIRRO IN
+(
+    SELECT DISTINCT BAIRRO
+    FROM TABELA_DE_VENDEDORES
+);
+--- fim do topico
+
+-- Usando LIKE
+SELECT *
+FROM TABELA_DE_PRODUTOS
+WHERE SABOR LIKE '%Limao%';
+--- fim do topico
+
+-- Usando DISTINCT
+SELECT DISTINCT 
+EMBALAGEM
+FROM TABELA_DE_PRODUTOS;
+--- fim do topico
+
+-- Usando ROWNUM
+SELECT TP.*
+FROM TABELA_DE_PRODUTOS TP
+WHERE ROWNUM <= 5;
+--- fim do topico
+
+-- Usando ORDER BY
+SELECT *
+FROM TABELA_DE_PRODUTOS
+ORDER BY PRECO_DE_LISTA DESC;
+--- fim do topico
+
+-- Usando GROUP BY
+/*
+Só dá para agrupar se for:
+    - somar (SUM)
+    - saber valor máximo (MAX)
+    - saber valor mínimo (MIN)
+    - tirar média (AVG)
+    - contar (COUNT)
+*/
+SELECT EMBALAGEM, MAX(PRECO_DE_LISTA)
+FROM TABELA_DE_PRODUTOS
+GROUP BY EMBALAGEM;
+--- fim do topico
+
+-- Usando HAVING
+/*
+    Serve para filtrar o 
+    resultado do GROUP BY
+*/
+SELECT ESTADO, SUM(LIMITE_DE_CREDITO)
+FROM TABELA_DE_CLIENTES
+GROUP BY ESTADO
+HAVING SUM(LIMITE_DE_CREDITO) >= 90000;
+--- fim do topico
+
+-- Usando CASE WHEN --> THEN --> ELSE --> END
+/*
+    IF, ELSE IF, ELSE, RETURN do SQL
+*/
+SELECT NOME_DO_PRODUTO, PRECO_DE_LISTA,
+(CASE WHEN PRECO_DE_LISTA >= 12 THEN 'PRODUTO CARO'
+      WHEN PRECO_DE_LISTA >= 7 AND PRECO_DE_LISTA < 12 THEN 'PRODUTO EM CONTA'
+      ELSE 'PRODUTO BARATO'
+      END) AS CLASSIFICACAO
+FROM TABELA_DE_PRODUTOS
+ORDER BY CLASSIFICACAO;
+--- fim do topico
+
+
+INSERT INTO TABELA_DE_CLIENTES 
+(CPF, NOME, ENDERECO_1, ENDERECO_2, BAIRRO, CIDADE, ESTADO, CEP, DATA_DE_NASCIMENTO, IDADE, 
+GENERO, LIMITE_DE_CREDITO, VOLUME_DE_COMPRA, PRIMEIRA_COMPRA) 
+VALUES ('23412632331', 'Juliana Silva', 'R. Tramandai', '', 'Bangu', 'Rio de Janeiro', 
+'RJ', '23400000', TO_DATE('1989-02-04','YYYY-MM-DD'), 28, 'F', 180000.0000, 24500, 0);
