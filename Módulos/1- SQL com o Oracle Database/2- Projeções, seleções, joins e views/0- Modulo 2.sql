@@ -143,6 +143,9 @@ INNER JOIN VW_SUM_EMB VW ON VW.EMBALAGEM = TP.EMBALAGEM
 WHERE VW.SOMA_PRECO >= 80;
 --- fim do topico
 
+-- Funções no Oracle Database
+...
+--- fim do topico
 
 
 
