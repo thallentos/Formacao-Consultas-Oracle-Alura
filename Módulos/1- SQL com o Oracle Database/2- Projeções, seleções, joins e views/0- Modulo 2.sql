@@ -144,7 +144,10 @@ WHERE VW.SOMA_PRECO >= 80;
 --- fim do topico
 
 -- Funções no Oracle Database
-...
+/*
+Olhe na DOC ou pergunte para o Gepeto caso
+exista alguma função nativa da Oracle
+*/
 --- fim do topico
 
 
